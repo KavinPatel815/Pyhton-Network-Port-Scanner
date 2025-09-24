@@ -1,0 +1,6 @@
+A Network Scanner that searches if a specific port is open on a specific IP address.
+
+Followed the guide for a TCP scanner from https://www.geeksforgeeks.org/python/network-scanner-in-python/
+
+Added basic input for IP address and Port number with input validation.
+
