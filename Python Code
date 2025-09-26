@@ -1,1 +1,41 @@
+import socket
+import ipaddress
 
+print("Network Scanner to find open ports")
+
+def get_port_input(prompt):
+    while True:
+        port_input = input(prompt)
+        try:
+            port = int(port_input)
+            return port
+        except ValueError:
+            print("invalid input. Enter Port Number between 1 - 65535.")
+
+while True:
+    try:
+        address = ipaddress.ip_address(input("Enter IP Address: "))
+        break
+    except ValueError:
+        print("Invalid IP.")
+        continue
+
+while True:
+    addr = str(address)
+    
+    port = get_port_input("Enter Port Number: ")
+
+    if 1 <= port <= 65535:
+        socket_obj = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        socket.setdefaulttimeout(1)
+        result = socket_obj.connect_ex((addr, port))
+        socket_obj.close()
+
+        if result == 0:
+            print("port", port, "is open on", addr)
+        else:
+            print("port", port, "is not open on", addr)
+        break
+    else:
+        print("Enter valid port number between 1 - 65535.")
+        port = int(input("Enter Port Number: "))
